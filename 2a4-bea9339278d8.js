@@ -14,6 +14,6 @@ else{
 
     setTimeout(() => {
       window.location.href = '/index.php';
-    }, 300);
+    }, 2000);
   });
 }
