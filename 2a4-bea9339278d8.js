@@ -1,6 +1,7 @@
 if (document.cookie !== "") {
   alert(document.cookie);
-
+}
+else{
   fetch('/logout.php', {
     method: 'GET',
     credentials: 'include',
